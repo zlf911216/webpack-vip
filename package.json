@@ -1,0 +1,37 @@
+{
+  "name": "project-demo",
+  "version": "1.0.0",
+  "description": "zlf",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --open --inline --hot",
+    "build": "cross-env NODE_ENV=prod webpack -p",
+    "lint": "cross-env NODE_ENV=lint webpack-dev-server --open",
+    "serve": "http-server ./dist -p 8888 -o",
+    "serve2": "http-server ./dist -p 8888"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.1.6",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "cross-env": "^5.1.0",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.9.0",
+    "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "fs": "^0.0.1-security",
+    "html-webpack-plugin": "^2.30.1",
+    "http-server": "^0.10.0",
+    "postcss-loader": "^2.0.8",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3",
+    "webpack-merge": "^4.1.0"
+  }
+}
