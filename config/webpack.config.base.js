@@ -1,5 +1,4 @@
 const HTMLWebpackPlugin = require("html-webpack-plugin")
-const CleanWebpackPlugin = require("clean-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const fs = require('fs')
 
@@ -20,7 +19,7 @@ module.exports = {
 	// 入口文件
 	entry: Entries,
 	// 启用 sourceMap
-	devtool: "cheap-module-source-map",
+	// devtool: "cheap-module-source-map",
 	// 加载器
 	module: {
 		rules: [
@@ -75,15 +74,6 @@ module.exports = {
 	},
 	// 插件
 	plugins: [
-		// 自动清理 dist 文件夹
-		new CleanWebpackPlugin(
-			['dist', 'dev'],　//匹配删除的文件
-			{
-				root: process.cwd(), //根目录
-				verbose: true, //开启在控制台输出信息
-				dry: false //启用删除文件
-			}
-		),
 		// 将 css 抽取到某个文件夹
 		new ExtractTextPlugin("css/[name]-[hash].css"),
 		// 自动生成 HTML 插件
