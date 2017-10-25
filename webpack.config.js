@@ -1,2 +1,2 @@
 const env = process.env.NODE_ENV
-module.exports = require(`./webpack.config.${env}.js`)
+module.exports = require(`./config/webpack.config.${env}.js`)
