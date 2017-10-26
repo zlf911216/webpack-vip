@@ -1,28 +1,20 @@
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const fs = require('fs')
 const glob = require('glob')
-
-glob('file', {
-  expandDirectories: {
-    files: ['vipkid'],
-  }
-}).then(paths => {
-  console.log(paths)
-})
-
 
 let HTMLPlugins = []
 let Entries = {}
 
-fs.readdirSync('./vipkid/module').forEach(page => {
-  const htmlPlugin = new HTMLWebpackPlugin({
-    filename: `${page}.html`,
-    template: process.cwd() + `/vipkid/module/${page}/index.html`,
-    chunks: [page, 'commons'],
-  })
-  HTMLPlugins.push(htmlPlugin)
-  Entries[page] = process.cwd() + `/vipkid/module/${page}/index.js`
+glob.sync('./vipkid/module/*').forEach(path => {
+	let pathSplit = path.split('/')
+	let page = pathSplit[pathSplit.length - 1]
+	const htmlPlugin = new HTMLWebpackPlugin({
+		filename: `${page}.html`,
+		template: process.cwd() + `/vipkid/module/${page}/index.html`,
+		chunks: [page, 'commons'],
+	})
+	HTMLPlugins.push(htmlPlugin)
+	Entries[page] = process.cwd() + `/vipkid/module/${page}/index.js`
 })
 
 module.exports = {

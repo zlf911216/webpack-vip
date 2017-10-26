@@ -4,9 +4,8 @@
   "description": "zlf",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev webpack-dev-server --open --inline --hot",
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --inline --hot",
     "build": "cross-env NODE_ENV=prod webpack -p",
-    "lint": "cross-env NODE_ENV=lint webpack-dev-server --open",
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"
   },
