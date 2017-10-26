@@ -10,12 +10,13 @@ module.exports = {
 		sourceType: 'module',
 	},
 	rules: {
-		'comma-dangle': ['error', 'always-multiline'],
+    'arrow-parens': 0,
+    'generator-star-spacing': 0,
 		indent: ['error', 2],
-		'linebreak-style': ['error', 'unix'],
-		quotes: ['error', 'single'],
-		semi: ['error', 'always'],
-		'no-unused-vars': ['warn'],
-		'no-console': 0,
+    'space-before-function-paren': ['error', {
+      'anonymous': 'always',
+      'named': 'ignore',
+      'asyncArrow': 'always'
+    }]
 	},
 }
