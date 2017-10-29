@@ -4,8 +4,8 @@
   "description": "zlf",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=prod webpack -p"
+    "dev": "cross-env NODE_ENV=dev node express.js",
+    "build": "cross-env NODE_ENV=prod webpack && cross-env NODE_ENV=prod node express.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
     "create-webpack-app": "^1.0.9",
@@ -38,6 +39,18 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "moment": "^2.19.1",
+    "pug": "^2.0.0-rc.4",
+    "pug-loader": "^2.3.0",
+    "supervisor": "^0.12.0",
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.0",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.20.0"
   }
 }

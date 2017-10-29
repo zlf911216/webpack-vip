@@ -1,30 +1,23 @@
 const webpack = require('webpack')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const glob = require('glob')
-
-let HTMLPlugins = []
-let Entries = {}
-
-glob.sync('./vipkid/module/*').forEach(path => {
-	let pathSplit = path.split('/')
-	let page = pathSplit[pathSplit.length - 1]
-	const htmlPlugin = new HTMLWebpackPlugin({
-		filename: `${page}.html`,
-		template: process.cwd() + `/vipkid/module/${page}/index.html`,
-		chunks: [page, 'vendor', 'manifest'],
-	})
-	HTMLPlugins.push(htmlPlugin)
-	Entries[page] = process.cwd() + `/vipkid/module/${page}/index.js`
-})
 
 module.exports = {
-	// 入口文件
-	entry: Entries,
 	// 启用 sourceMap
 	// devtool: "cheap-module-source-map",
 	// 加载器
+	resolve: {
+		alias: {
+			'~components': `${process.cwd()}/vue-components`,
+			'~images': `${process.cwd()}/vipkid/images`,
+			'~lib': `${process.cwd()}/vipkid/lib`
+		}
+	},
 	module: {
 		rules: [
+			{
+				test: /\.pug$/,
+				exclude: /node_modules/,
+				loader: 'pug-loader'
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -58,8 +51,6 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
 			names: ['vendor', 'manifest']
-		}),
-		// 自动生成 HTML 插件
-		...HTMLPlugins
+		})
 	]
 }

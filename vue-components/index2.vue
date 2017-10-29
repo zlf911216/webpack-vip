@@ -2,8 +2,8 @@
 	<div class="sss">
 		<div>2321112</div>
 		<p>
-			<router-link to="/c">Go to c</router-link>
-			<router-link to="/h">Go to h</router-link>
+			<router-link to="/a">Go to a</router-link>
+			<router-link to="/b">Go to b</router-link>
 		</p>
 		<router-view></router-view>
 	</div>
