@@ -12,6 +12,13 @@ module.exports = webpackMerge(webpackBase, {
   module: {
     rules: [
       {
+        // 对 css 后缀名进行处理
+        test: /\.sass/,
+        // 不处理 node_modules 文件中的 css 文件
+        exclude: [/node_modules/],
+        loader: ["vue-style-loader", "css-loader", "sass-loader"]
+      },
+      {
         test: /\.js$/,
         // 强制先进行 ESLint 检查
         enforce: "pre",
@@ -42,7 +49,7 @@ module.exports = webpackMerge(webpackBase, {
   devServer: {
     // 项目根目录
     contentBase: process.cwd() + "/dev",
-    noInfo: true,
+    noInfo: false,
     compress: true,
     hot: true,
     // 错误、警告展示设置

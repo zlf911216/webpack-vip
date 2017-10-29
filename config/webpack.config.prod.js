@@ -1,5 +1,6 @@
 const webpackBase = require("./webpack.config.base")
 const CleanWebpackPlugin = require("clean-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpackMerge = require("webpack-merge")
 const webpack = require("webpack")
 
@@ -10,6 +11,21 @@ module.exports = webpackMerge(webpackBase, {
     path: process.cwd() + "/dist",
     chunkFilename: "[id].chunk.js",
   },
+	module: {
+		rules: [
+      {
+        // 对 css 后缀名进行处理
+        test: /\.sass/,
+        // 不处理 node_modules 文件中的 css 文件
+        exclude: [/node_modules/],
+        // 抽取 css 文件到单独的文件夹
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader!postcss-loader!sass-loader"
+        })
+      }
+    ]
+	},
   plugins: [
     // 自动清理 dist 文件夹
     new CleanWebpackPlugin(
@@ -21,16 +37,8 @@ module.exports = webpackMerge(webpackBase, {
       }
     ),
     // 代码压缩
-    new webpack.optimize.UglifyJsPlugin({
-      // 开启 sourceMap
-      sourceMap: true
-    }),
-    // 提取公共 JavaScript 代码
-    new webpack.optimize.CommonsChunkPlugin({
-      // chunk 名为 commons
-      name: "commons",
-      filename: "js/[name]-[hash].js",
-      publicPath: "/dist/"
-    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    // 将 css 抽取到某个文件夹
+    new ExtractTextPlugin("css/[name]-[hash].css")
   ]
 })

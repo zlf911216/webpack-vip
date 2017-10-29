@@ -14,7 +14,6 @@ module.exports = {
 		"no-console": 0,
     'arrow-parens': 0,
     'generator-star-spacing': 0,
-		"no-extra-parens": 2,
 		"no-fallthrough": 1,
 		"no-implicit-coercion": 1,
 		"camelcase": 2,
