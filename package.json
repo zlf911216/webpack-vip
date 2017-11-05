@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev node express.js",
-    "build": "cross-env NODE_ENV=prod webpack && cross-env NODE_ENV=prod node express.js"
+    "build": "cross-env NODE_ENV=prod webpack"
   },
   "author": "",
   "license": "ISC",

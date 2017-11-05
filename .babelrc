@@ -1,4 +1,4 @@
 {
   "presets": ["env"],
-  "plugins": ["transform-es2015-spread", "syntax-dynamic-import"]
+  "plugins": ["syntax-dynamic-import"]
 }

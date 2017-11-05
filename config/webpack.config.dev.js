@@ -1,10 +1,10 @@
+const glob = require('glob')
+const webpack = require("webpack")
 const webpackBase = require("./webpack.config.base")
-const CleanWebpackPlugin = require("clean-webpack-plugin")
 const webpackMerge = require("webpack-merge")
+const CleanWebpackPlugin = require("clean-webpack-plugin")
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true'
-const webpack = require("webpack")
-const glob = require('glob')
 
 let HTMLPlugins = []
 let Entries = {}
@@ -13,13 +13,12 @@ glob.sync('./vipkid/module/*').forEach(path => {
 	let pathSplit = path.split('/')
 	let page = pathSplit[pathSplit.length - 1]
 	const htmlPlugin = new HTMLWebpackPlugin({
-		filename: `views/${page}.html`,
+		filename: `${page}.html`,
 		template: process.cwd() + `/vipkid/module/${page}/index.pug`,
-		chunks: [page, 'vendor', 'manifest'],
-		publicPath: 'views/'
+		chunks: [page, 'vendor', 'manifest']
 	})
 	HTMLPlugins.push(htmlPlugin)
-	Entries[page] = [process.cwd() + `/vipkid/module/${page}/index.js`, hotMiddlewareScript]
+	Entries[page] = [`${process.cwd()}/vipkid/module/${page}/index.js`, hotMiddlewareScript]
 })
 // 公共资源添加
 Entries['manifest'] = [
@@ -65,10 +64,15 @@ module.exports = webpackMerge(webpackBase, {
 		]
 	},
 	plugins: [
-		// 自动清理 dist 文件夹
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify("dev")
+      }
+    }),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
+    // 自动清理 dist 文件夹
 		new CleanWebpackPlugin(
 			['dev'],  // 匹配删除的文件
 			{

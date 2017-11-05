@@ -1,10 +1,10 @@
-const webpackBase = require("./webpack.config.base")
-const CleanWebpackPlugin = require("clean-webpack-plugin")
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const webpackMerge = require("webpack-merge")
-const HTMLWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
 const webpack = require("webpack")
+const webpackBase = require("./webpack.config.base")
+const webpackMerge = require("webpack-merge")
+const CleanWebpackPlugin = require("clean-webpack-plugin")
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 let HTMLPlugins = []
 let Entries = {}
@@ -13,10 +13,9 @@ glob.sync('./vipkid/module/*').forEach(path => {
 	let pathSplit = path.split('/')
 	let page = pathSplit[pathSplit.length - 1]
 	const htmlPlugin = new HTMLWebpackPlugin({
-		filename: `views/${page}.html`,
+		filename: `${page}.html`,
 		template: process.cwd() + `/vipkid/module/${page}/index.pug`,
-		chunks: [page, 'vendor', 'manifest'],
-		publicPath: 'views/'
+		chunks: [page, 'vendor', 'manifest']
 	})
 	HTMLPlugins.push(htmlPlugin)
 	Entries[page] = process.cwd() + `/vipkid/module/${page}/index.js`
@@ -55,6 +54,11 @@ module.exports = webpackMerge(webpackBase, {
     ]
 	},
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
     // 自动清理 dist 文件夹
     new CleanWebpackPlugin(
       ['prod'], //匹配删除的文件
